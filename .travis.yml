@@ -1,27 +1,23 @@
 language: node_js
 node_js:
-  - "4"
-compiler: clang-3.6
+- '4'
 env:
-  - CXX=clang-3.6
+  - CXX=g++-4.8
 addons:
   apt:
     sources:
-      - llvm-toolchain-precise-3.6
       - ubuntu-toolchain-r-test
     packages:
-      - clang-3.6
       - g++-4.8
 sudo: false
 cache:
   directories:
   - node_modules
 before_install:
-- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
 - npm config set spin false
-- npm install -g npm@^2
-install:
 - npm install -g bower
+- npm install phantomjs-prebuilt
+install:
 - npm install
 - bower install
 script:
