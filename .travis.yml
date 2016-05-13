@@ -1,23 +1,32 @@
----
 language: node_js
 node_js:
-  - "0.12"
-
+  - "4"
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 sudo: false
-
 cache:
   directories:
-    - node_modules
-
+  - node_modules
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
+- npm config set spin false
+- npm install -g npm@^2
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
+- npm install -g bower
+- npm install
+- bower install
 script:
-  - npm test
+- npm test
+deploy:
+  provider: heroku
+  api_key:
+    secure: DqNBRPB1piqiHmnzUeXg0aP9pMyHtFZVs7QjA4pL1nAkDDwDKf1m+CdaSnww4aMcqWYDL1A3dIdbhI4IizbXi8NwktzKvpIAVqa79qOXDTKn67UtRIIWtkFU2G3EKjhsGtvNv8fBQiOOGZJ+0fwFhLovXy3Yhx8C/gcZS6Ipm10g6b8JVFfLhhh3jOTC4xoJJzSLFQ1+m9uL5VigfFz0jezo/9+MYi+ziUZeq8OQfIHAQSFextnkPYRHXOPKzz2gP1LBf4BoxPlX3TWaeDmvNsa8UkA/kqMoKqM553GHdqVutEybiWY9/ZFjd5RxTow26AWnyleuqM6tz6SXR3raOiyARbfWtk4mrNZU9sb66AiQeNxj0C9pEKGQKcqZhtSFjyPXElx0jO3qaLPW5oEzOqBcpKGUWDCncG2qVfH2WZtWnlCic7WDfYVlwPvgKGoTU7qrZG4hLK8dVehYsOWt9VSe8rb57ItVQ3rTULvFeAaV7HLBp6AdukeHqqCF4kb2RoMM8mkx0kC5/RsRpTvJ4ptXWVqwzfc8CN0fySjgpypsprOPQHpixb+ZQk/v0Mx7xWKpmFln5/0AyKLF5KypFvgYcNU58kAB5C82zbFV5mKhz5Da1GG1XSNCg/d4imO2nmAp+86/rHRX0+/j0ZTrUvAcmZBYKmzm6g5S5dSZB/Q=
+  app: secret-depths-51746
+  on:
+    repo: 2468ben/peepstack_tutorial
